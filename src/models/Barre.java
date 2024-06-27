@@ -21,6 +21,21 @@ public class Barre extends Sprite{
         this.hauteur = 20;
     }
 
+    public void deplacement(int direction) {
+        if(direction == 1) {
+            if(x > 0) {
+                x -= 10;
+            }
+        } else if(direction == 2) {
+            if(x < Fenetre.LARGEUR - largeur) {
+                x += 10;
+            }
+        }
+    }
+    public Rectangle getRectangle() {
+        return new Rectangle(x, y, largeur, hauteur);
+    }
+
     public void dessiner(Graphics2D dessin) {
         dessin.setColor(couleur);
         dessin.fillRect(x,y,largeur,hauteur);

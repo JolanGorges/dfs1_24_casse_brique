@@ -70,7 +70,11 @@ public class Fenetre extends Canvas implements KeyListener {
 
             //----- app -----
             for(Balle b : listeBalles) {
-                b.deplacement();
+                if(b.getRectangle().intersects(barre.getRectangle())) {
+                    b.deplacement(true);
+                } else {
+                    b.deplacement(false);
+                }
             }
 
             for(Sprite s : listeSprites) {
@@ -99,6 +103,10 @@ public class Fenetre extends Canvas implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_SPACE) {
             toucheEspace = true;
+        } else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+            barre.deplacement(1);
+        } else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            barre.deplacement(2);
         }
     }
 

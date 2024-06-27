@@ -27,7 +27,7 @@ public class Balle extends Sprite{
         this.vitesseY = 5;
     }
 
-    public void deplacement() {
+    public void deplacement(boolean collision) {
 
         if(x > Fenetre.LARGEUR - diametre || x < 0) {
             vitesseX = - vitesseX;
@@ -37,6 +37,11 @@ public class Balle extends Sprite{
             vitesseY = - vitesseY;
         }
 
+        if(collision) {
+            vitesseY = -vitesseY;
+        }
+
+
         x += vitesseX;
         y += vitesseY;
     }
@@ -44,6 +49,10 @@ public class Balle extends Sprite{
     public void dessiner(Graphics2D dessin) {
         dessin.setColor(couleur);
         dessin.fillOval(x,y,diametre,diametre);
+    }
+
+    public Rectangle getRectangle() {
+        return new Rectangle(x, y, diametre, diametre);
     }
 
     public int getX() {
