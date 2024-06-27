@@ -15,6 +15,7 @@ public class Fenetre extends Canvas implements KeyListener {
     public static final int LARGEUR = 500;
     public static final int HAUTEUR = 700;
 
+
     protected boolean toucheEspace = false;
 
     ArrayList<Balle> listeBalles = new ArrayList<>();
@@ -31,7 +32,9 @@ public class Fenetre extends Canvas implements KeyListener {
         this.setFocusable(false);
 
         fenetre.pack();
-        fenetre.setSize(LARGEUR, HAUTEUR );
+        System.out.println(fenetre.getInsets().left);
+        fenetre.setSize(LARGEUR + fenetre.getInsets().left + fenetre.getInsets().right, HAUTEUR + fenetre.getInsets().top + fenetre.getInsets().bottom);
+
         fenetre.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         fenetre.setResizable(false);
         fenetre.requestFocus();
