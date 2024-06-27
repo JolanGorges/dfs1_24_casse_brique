@@ -41,7 +41,6 @@ public class Balle extends Sprite{
             vitesseY = -vitesseY;
         }
 
-
         x += vitesseX;
         y += vitesseY;
     }
@@ -49,10 +48,11 @@ public class Balle extends Sprite{
     public void dessiner(Graphics2D dessin) {
         dessin.setColor(couleur);
         dessin.fillOval(x,y,diametre,diametre);
+
     }
 
-    public Rectangle getRectangle() {
-        return new Rectangle(x, y, diametre, diametre);
+    public boolean collision(Rectangle r) {
+        return (x < r.x + r.largeur && x + diametre > r.x && y < r.y + r.hauteur && y + diametre > r.y);
     }
 
     public int getX() {

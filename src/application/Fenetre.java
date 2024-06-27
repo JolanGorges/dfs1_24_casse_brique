@@ -70,7 +70,7 @@ public class Fenetre extends Canvas implements KeyListener {
 
             //----- app -----
             for(Balle b : listeBalles) {
-                if(b.getRectangle().intersects(barre.getRectangle())) {
+                if(b.collision(barre)) {
                     b.deplacement(true);
                 } else {
                     b.deplacement(false);
@@ -80,8 +80,7 @@ public class Fenetre extends Canvas implements KeyListener {
             for(Sprite s : listeSprites) {
                 s.dessiner(dessin);
             }
-
-
+            
             if(toucheEspace) {
                 listeBalles.add( new Balle(200, 400 , Color.BLUE, 50));
             }

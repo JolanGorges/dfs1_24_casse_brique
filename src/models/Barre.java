@@ -4,21 +4,9 @@ import application.Fenetre;
 
 import java.awt.*;
 
-public class Barre extends Sprite{
-
-    protected int largeur;
-    protected int hauteur;
-
-    public Barre(int x, int y, int largeur, int hauteur, Color couleur) {
-        super(x, y, couleur);
-        this.largeur = largeur;
-        this.hauteur = hauteur;
-    }
-
+public class Barre extends Rectangle {
     public Barre() {
-        super(Fenetre.LARGEUR / 2 - 75, Fenetre.HAUTEUR - 100, Color.BLUE);
-        this.largeur = 150;
-        this.hauteur = 20;
+        super(Fenetre.LARGEUR / 2 - 75, Fenetre.HAUTEUR - 100, 150, 20, Color.BLUE);
     }
 
     public void deplacement(int direction) {
@@ -31,13 +19,5 @@ public class Barre extends Sprite{
                 x += 10;
             }
         }
-    }
-    public Rectangle getRectangle() {
-        return new Rectangle(x, y, largeur, hauteur);
-    }
-
-    public void dessiner(Graphics2D dessin) {
-        dessin.setColor(couleur);
-        dessin.fillRect(x,y,largeur,hauteur);
     }
 }
