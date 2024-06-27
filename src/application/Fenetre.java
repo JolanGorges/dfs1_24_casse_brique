@@ -2,6 +2,7 @@ package application;
 
 import models.Balle;
 import models.Barre;
+import models.Brique;
 import models.Sprite;
 
 import javax.swing.*;
@@ -32,7 +33,6 @@ public class Fenetre extends Canvas implements KeyListener {
         this.setFocusable(false);
 
         fenetre.pack();
-        System.out.println(fenetre.getInsets().left);
         fenetre.setSize(LARGEUR + fenetre.getInsets().left + fenetre.getInsets().right, HAUTEUR + fenetre.getInsets().top + fenetre.getInsets().bottom);
 
         fenetre.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -59,8 +59,16 @@ public class Fenetre extends Canvas implements KeyListener {
 
         Balle balle = new Balle(100, 200 , Color.GREEN, 30);
 
+        ArrayList<Brique> briques = new ArrayList<>();
+        for(int i = 0; i < 5; i++) {
+            for(int j = 0; j < 10; j++) {
+                briques.add(new Brique(j * (Brique.LARGEUR + 2), i * (Brique.HAUTEUR + 2)));
+            }
+        }
+
         listeBalles.add(balle);
         listeSprites.add(balle);
+        listeSprites.addAll(briques);
 
         while(true) {
 
@@ -75,12 +83,21 @@ public class Fenetre extends Canvas implements KeyListener {
                 } else {
                     b.deplacement(false);
                 }
+
+                for(Brique br : briques) {
+                    if(b.collision(br)) {
+                        b.deplacement(true);
+                        briques.remove(br);
+                        listeSprites.remove(br);
+                        break;
+                    }
+                }
             }
 
             for(Sprite s : listeSprites) {
                 s.dessiner(dessin);
             }
-            
+
             if(toucheEspace) {
                 listeBalles.add( new Balle(200, 400 , Color.BLUE, 50));
             }
@@ -90,7 +107,6 @@ public class Fenetre extends Canvas implements KeyListener {
             this.getBufferStrategy().show();
             Thread.sleep(1000 / 60);
         }
-
     }
 
     @Override

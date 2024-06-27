@@ -16,8 +16,4 @@ public class Rectangle extends Sprite {
         dessin.setColor(couleur);
         dessin.fillRect(x,y,largeur,hauteur);
     }
-
-    public boolean collision(Rectangle r) {
-        return (x < r.x + r.largeur && x + largeur > r.x && y < r.y + r.hauteur && y + hauteur > r.y);
-    }
 }
