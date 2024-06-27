@@ -18,6 +18,8 @@ public class Fenetre extends Canvas implements KeyListener {
 
 
     protected boolean toucheEspace = false;
+    protected boolean toucheGauche = false;
+    protected boolean toucheDroite = false;
 
     ArrayList<Balle> listeBalles = new ArrayList<>();
     ArrayList<Sprite> listeSprites = new ArrayList<>();
@@ -71,13 +73,13 @@ public class Fenetre extends Canvas implements KeyListener {
         listeSprites.addAll(briques);
 
         while(true) {
-            for (Balle b : listeBalles) {
-                if(b.verifieSiBallePerdue()) {
-                    listeBalles.remove(b);
-                    listeSprites.remove(b);
-                    break;
-                }
-            }
+//            for (Balle b : listeBalles) {
+//                if(b.verifieSiBallePerdue()) {
+//                    listeBalles.remove(b);
+//                    listeSprites.remove(b);
+//                    break;
+//                }
+//            }
 
             if(listeBalles.isEmpty()) {
                 afficherMessageDeFin("Tu as perdu !");
@@ -87,6 +89,13 @@ public class Fenetre extends Canvas implements KeyListener {
             if (briques.isEmpty()) {
                 afficherMessageDeFin("Tu as gagné !");
                 return;
+            }
+
+            if (toucheGauche) {
+                barre.deplacement(1);
+            }
+            if (toucheDroite) {
+                barre.deplacement(2);
             }
 
             Graphics2D dessin = (Graphics2D) this.getBufferStrategy().getDrawGraphics();
@@ -140,9 +149,9 @@ public class Fenetre extends Canvas implements KeyListener {
         if(e.getKeyCode() == KeyEvent.VK_SPACE) {
             toucheEspace = true;
         } else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-            barre.deplacement(1);
+            toucheGauche = true;
         } else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            barre.deplacement(2);
+            toucheDroite = true;
         }
     }
 
@@ -150,6 +159,10 @@ public class Fenetre extends Canvas implements KeyListener {
     public void  keyReleased(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_SPACE) {
             toucheEspace = false;
+        } else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+            toucheGauche = false;
+        } else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            toucheDroite = false;
         }
     }
 }
