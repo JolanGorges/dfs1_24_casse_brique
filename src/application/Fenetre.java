@@ -71,6 +71,23 @@ public class Fenetre extends Canvas implements KeyListener {
         listeSprites.addAll(briques);
 
         while(true) {
+            for (Balle b : listeBalles) {
+                if(b.verifieSiBallePerdue()) {
+                    listeBalles.remove(b);
+                    listeSprites.remove(b);
+                    break;
+                }
+            }
+
+            if(listeBalles.isEmpty()) {
+                afficherMessageDeFin("Tu as perdu !");
+                return;
+            }
+
+            if (briques.isEmpty()) {
+                afficherMessageDeFin("Tu as gagné !");
+                return;
+            }
 
             Graphics2D dessin = (Graphics2D) this.getBufferStrategy().getDrawGraphics();
             dessin.setColor(Color.WHITE);
@@ -107,6 +124,10 @@ public class Fenetre extends Canvas implements KeyListener {
             this.getBufferStrategy().show();
             Thread.sleep(1000 / 60);
         }
+    }
+
+    public void afficherMessageDeFin(String message) {
+        JOptionPane.showMessageDialog(this, message);
     }
 
     @Override

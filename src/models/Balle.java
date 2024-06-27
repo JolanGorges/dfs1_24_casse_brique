@@ -51,6 +51,10 @@ public class Balle extends Sprite{
 
     }
 
+    public boolean verifieSiBallePerdue() {
+        return y + diametre >= Fenetre.HAUTEUR;
+    }
+
     public boolean collision(Rectangle r) {
         return (x < r.x + r.largeur && x + diametre > r.x && y < r.y + r.hauteur && y + diametre > r.y);
     }
