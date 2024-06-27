@@ -73,13 +73,13 @@ public class Fenetre extends Canvas implements KeyListener {
         listeSprites.addAll(briques);
 
         while(true) {
-//            for (Balle b : listeBalles) {
-//                if(b.verifieSiBallePerdue()) {
-//                    listeBalles.remove(b);
-//                    listeSprites.remove(b);
-//                    break;
-//                }
-//            }
+            for (Balle b : listeBalles) {
+                if(b.verifieSiBallePerdue()) {
+                    listeBalles.remove(b);
+                    listeSprites.remove(b);
+                    break;
+                }
+            }
 
             if(listeBalles.isEmpty()) {
                 afficherMessageDeFin("Tu as perdu !");
@@ -125,7 +125,10 @@ public class Fenetre extends Canvas implements KeyListener {
             }
 
             if(toucheEspace) {
-                listeBalles.add( new Balle(200, 400 , Color.BLUE, 50));
+                Balle newBalle = new Balle(200, 400 , Color.GREEN, 30);
+                listeBalles.add(newBalle);
+                listeSprites.add(newBalle);
+                toucheEspace = false;
             }
             //---------------
 

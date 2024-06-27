@@ -3,8 +3,8 @@ package models;
 import java.awt.*;
 
 public class Rectangle extends Sprite {
-    public int largeur;
-    public int hauteur;
+    protected int largeur;
+    protected int hauteur;
 
     public Rectangle(int x, int y, int largeur, int hauteur, Color couleur) {
         super(x, y, couleur);
